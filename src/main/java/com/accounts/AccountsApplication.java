@@ -1,5 +1,7 @@
 package com.accounts;
 
+import com.accounts.service.Account;
+import com.accounts.service.AccountsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
