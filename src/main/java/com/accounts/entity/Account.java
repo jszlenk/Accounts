@@ -1,4 +1,4 @@
-package com.accounts.service;
+package com.accounts.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

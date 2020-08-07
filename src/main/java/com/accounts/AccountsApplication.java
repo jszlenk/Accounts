@@ -1,35 +1,36 @@
 package com.accounts;
 
-import com.accounts.service.Account;
-import com.accounts.service.AccountsRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.accounts.dto.AccountDto;
+import com.accounts.entity.Account;
+import com.accounts.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Optional;
+
+@Slf4j
 @SpringBootApplication
 public class AccountsApplication {
-
-    private static final Logger log = LoggerFactory.getLogger(AccountsApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(AccountsApplication.class);
     }
 
     @Bean
-    public CommandLineRunner createRecord(AccountsRepository repository) {
+    public CommandLineRunner createAccounts(AccountService accountService) {
         return (args) -> {
-            repository.save(new Account("72249000059957936727967706", "PLN", 6525.11));
+            accountService.save(new Account("72249000059957936727967706", "PLN", 6525.11));
 
             log.info("Accounts found with findAll():");
-            for (Account account : repository.findAll()) {
+            for (Account account : accountService.getAll()) {
                 log.info(account.toString());
             }
             log.info("-------------------------------");
 
-            Account account = repository.findById(1L);
+            Optional<Account> account = accountService.get(1L);
             log.info("Account found with findById(1L):");
             log.info(account.toString());
         };
